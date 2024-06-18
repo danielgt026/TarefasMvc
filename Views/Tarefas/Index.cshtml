@@ -1,0 +1,43 @@
+
+@model IEnumerable<TarefasMvc.Models.Tarefas> 
+
+<!--Inclua os TempData para Sucesso e Erro aqui, conforme exemplo na view de Autenticação-->
+
+@{ViewBag.Title = "Tarefas"; }<!--Título da página para o navegador-->
+
+<h2>Relação de Tarefas</h2><!--Título da página-->
+
+<p> <!--Links apontando para views na mesma pasta-->
+
+ @Html.ActionLink("Criar Nova Tarefa", "Create") 
+</p>
+<table class="table">
+ <tr><!--Títulos das colunas da tabela--> 
+ <th>@Html.DisplayNameFor(model => model.Id)</th> 
+ <th>@Html.DisplayNameFor(model => model.Nome)</th> 
+ <th>@Html.DisplayNameFor(model => model.Descricao)</th> 
+ <th>@Html.DisplayNameFor(model => model.Prioridade)</th> 
+ <th>@Html.DisplayNameFor(model => model.Status)</th>
+ <th>@Html.DisplayNameFor(model => model.DataCriacao)</th>
+ <th></th>
+ </tr>
+<!--Looping para escrever os dados na tabela-->
+
+@foreach (var item in Model) 
+ { 
+ <tr>
+ <td>@Html.DisplayFor(modelItem => item.Id)</td>
+ <td>@Html.DisplayFor(modelItem => item.Nome)</td> 
+ <td>@Html.DisplayFor(modelItem => item.Descricao)</td> 
+ <td>@Html.DisplayFor(modelItem => item.Prioridade)</td>
+ <td>@Html.DisplayFor(modelItem => item.Status )</td> 
+ <td>@Html.DisplayFor(modelItem => item.DataCriacao)</td>  
+ <td><!--Coluna para Links/botões-->
+    @Html.ActionLink("Editar", "Edit", new { id = item.Id } ) | 
+    @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) | 
+    @Html.ActionLink("Deletar", "Delete", new { id = item.Id }
+        , new {onclick = "return confirm('Deseja realmente excluir esta tarefa?')"})  
+ </td>
+ </tr>
+ } 
+</table>
